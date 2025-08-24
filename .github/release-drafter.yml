@@ -37,3 +37,17 @@ template: |
 
   ## Changes
   $CHANGES
+
+autolabeler:
+  - label: 'frontend'
+    files:
+      - '.github/workflows/frontend.yaml'
+      - 'frontend/**'
+      - '!**.md'
+
+  - label: 'backend'
+    files:
+        - '.github/workflows/backend.yaml'
+        - 'backend/**'
+        - '!**.md'
+
