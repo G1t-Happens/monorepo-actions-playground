@@ -30,19 +30,3 @@ jobs:
           config-name: release-drafter.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Append release date to draft
-        run: |
-          echo "## 📦 Release Draft" > body.md
-          echo "🗓 Created on: ${{ steps.date.outputs.date }}" >> body.md
-          echo "" >> body.md
-          echo "${{ steps.drafter.outputs.body }}" >> body.md
-
-      - name: Update release draft with date
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: draft-with-date
-          body_path: body.md
-          draft: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
