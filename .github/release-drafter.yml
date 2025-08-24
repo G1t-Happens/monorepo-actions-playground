@@ -33,5 +33,6 @@ version-resolver:
   default: patch
 template: |
   ## Changes
+  🗓 Release created on: $DATE
 
   $CHANGES
