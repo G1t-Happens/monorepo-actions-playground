@@ -1,49 +1,48 @@
-name: Release Drafter
+name: Release Drafter with Date
 
 on:
   push:
-    # branches to consider in the event; optional, defaults to all
     branches:
       - main
       - master
 
-  # pull_request event is required only for autolabeler
   pull_request:
-    # Only following types are handled by the action, but one can default to all as well
     types: [opened, reopened, synchronize]
-  # pull_request_target event is required for autolabeler to support PRs from forks
-  # pull_request_target:
-  #   types: [opened, reopened, synchronize]
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 jobs:
   update_release_draft:
-    permissions:
-      # write permission is required to create a github release
-      contents: write
-      # write permission is required for autolabeler
-      # otherwise, read permission is required at least
-      pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      # Set current release date manually, as release-drafter@v6 does not support a built-in date placeholder
-      - name: Set current date as env variable
-        run: echo "RELEASE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - uses: actions/checkout@v4
 
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
-      # (Optional) GitHub Enterprise requires GHE_HOST variable set
-      #- name: Set GHE_HOST
-      #  run: |
-      #    echo "GHE_HOST=${GITHUB_SERVER_URL##https:\/\/}" >> $GITHUB_ENV
-
-      # Drafts your next Release notes as Pull Requests are merged into "master"
-      - uses: release-drafter/release-drafter@v6
-        # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
+      - name: Run release-drafter
+        id: drafter
+        uses: release-drafter/release-drafter@v6
         with:
           config-name: release-drafter.yml
-        #   disable-autolabeler: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RELEASE_DATE: ${{ env.RELEASE_DATE }}
+
+      - name: Append release date to draft
+        run: |
+          echo "## 📦 Release Draft" > body.md
+          echo "🗓 Created on: ${{ steps.date.outputs.date }}" >> body.md
+          echo "" >> body.md
+          echo "${{ steps.drafter.outputs.body }}" >> body.md
+
+      - name: Update release draft with date
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: draft-with-date
+          body_path: body.md
+          draft: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
