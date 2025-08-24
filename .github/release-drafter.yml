@@ -32,7 +32,8 @@ version-resolver:
       - 'patch'
   default: patch
 template: |
-  ## Changes
+  ## 📦 Release $RESOLVED_VERSION
   🗓 Release created on: $DATE
 
+  ## Changes
   $CHANGES
