@@ -1,4 +1,4 @@
-name: Release Drafter with Date
+name: Release Drafter
 
 on:
   push:
