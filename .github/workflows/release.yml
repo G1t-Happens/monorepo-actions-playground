@@ -27,7 +27,12 @@ jobs:
       # otherwise, read permission is required at least
       pull-requests: write
     runs-on: ubuntu-latest
-    steps:
+      
+      # Set current release date manually, as release-drafter@v6 does not support a built-in date placeholder
+      - name: Set current date as env variable
+        run: echo "RELEASE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+
       # (Optional) GitHub Enterprise requires GHE_HOST variable set
       #- name: Set GHE_HOST
       #  run: |
@@ -41,3 +46,4 @@ jobs:
         #   disable-autolabeler: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_DATE: ${{ env.RELEASE_DATE }}
