@@ -58,11 +58,8 @@ template: |
   
   ## Full Changelog
   $PREVIOUS_TAG
-  $NEXT_TAG
-  $REPOSITORY_OWNER
-  $REPOSITORY_NAME
-  $PREVIOUS_TAG
-  $NEXT_TAG
+  $REPOSITORY
+  $OWNER
 
 
 # Autolabeler settings to automatically add labels based on file paths or PR details like Title or Branch
