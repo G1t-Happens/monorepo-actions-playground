@@ -2,12 +2,12 @@ name-template: 'v$RESOLVED_VERSION 🌈'
 tag-template: 'v$RESOLVED_VERSION'
 categories:
   - title: '🚀 Features'
-    collapse-after: 3
+    collapse-after: 5
     labels:
       - 'feature'
       - 'enhancement'
   - title: '🐛 Bug Fixes'
-    collapse-after: 3
+    collapse-after: 5
     labels:
       - 'fix'
       - 'bugfix'
@@ -50,4 +50,14 @@ autolabeler:
         - '.github/workflows/backend.yaml'
         - 'backend/**'
         - '!**.md'
+
+  - label: 'bug'
+    branch:
+      - '/fix\/.+/'
+      - '/bug\/.+/'
+      - '/bugfix\/.+/'
+    title:
+      - '/fix/i'
+      - '/bug/i'
+      - '/bugfix/i'
 
