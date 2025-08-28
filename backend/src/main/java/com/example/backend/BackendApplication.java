@@ -3,7 +3,7 @@ package com.example.backend;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//Start app
+//Start
 @SpringBootApplication
 public class BackendApplication {
 
