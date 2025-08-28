@@ -55,6 +55,9 @@ template: |
 
   ## Changes
   $CHANGES
+  
+  ## Full Changelog
+  [Full Changelog: $PREVIOUS_TAG...$NEXT_TAG](https://github.com/$REPOSITORY_OWNER/$REPOSITORY_NAME/compare/$PREVIOUS_TAG...$NEXT_TAG)
 
 
 # Autolabeler settings to automatically add labels based on file paths or PR details like Title or Branch
