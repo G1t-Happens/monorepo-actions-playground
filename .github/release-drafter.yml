@@ -91,10 +91,12 @@ autolabeler:
   - label: 'enhancement'
     branch:
       - '/feature\/.+/'
+      - '/feat\/.+/'
       - '/feature request\/.+/'
       - '/enhancement\/.+/'
     title:
       - '/feature/i'
+      - '/feat/i'
       - '/feature request/i'
       - '/enhancement/i'
 
